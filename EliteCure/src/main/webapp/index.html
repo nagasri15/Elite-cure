@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Cure - Medicine Reminder</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .landing-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .landing-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: fadeInScale 0.8s ease;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .app-logo {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .app-title {
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            font-size: 2.5rem;
+        }
+        
+        .app-subtitle {
+            color: var(--text-light);
+            margin-bottom: 32px;
+            font-size: 1.25rem;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+            text-align: left;
+        }
+        
+        .feature-item {
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .feature-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-buttons .btn {
+            min-width: 180px;
+        }
+        
+        @media (max-width: 768px) {
+            .landing-content {
+                padding: 40px 20px;
+            }
+            
+            .app-title {
+                font-size: 2rem;
+            }
+            
+            .app-subtitle {
+                font-size: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <div class="landing-content">
+            <div class="app-logo">💊</div>
+            <h1 class="app-title">Elite Cure</h1>
+            <p class="app-subtitle">
+                Your Personal Medicine Reminder Assistant<br>
+                Never miss a dose again with smart reminders and easy tracking
+            </p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-title">Smart Reminders</div>
+                    <div class="feature-desc">Get timely notifications for your medicine schedule</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Responsive Design</div>
+                    <div class="feature-desc">Access from any device - phone, tablet, or desktop</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Secure & Private</div>
+                    <div class="feature-desc">Your health data is encrypted and protected</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-title">Easy to Use</div>
+                    <div class="feature-desc">Simple interface for managing all your medications</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="/login.html" class="btn btn-primary">Login</a>
+                <a href="/register.html" class="btn btn-outline">Register</a>
+            </div>
+            
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 2px solid var(--border-color);">
+                <p style="color: var(--text-light); font-size: 0.9rem;">
+                    <strong>Test Account:</strong> test@elitecure.com / Test@123
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

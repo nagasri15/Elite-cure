@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Elite Cure</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background: var(--bg-light);
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 32px 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .greeting {
+            flex: 1;
+        }
+        
+        .greeting h1 {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+        
+        .greeting p {
+            opacity: 0.9;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .dashboard-main {
+            max-width: 1200px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .stat-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        
+        .stat-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            color: var(--text-dark);
+        }
+        
+        .reminders-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .reminder-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .reminder-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .reminder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        
+        .reminder-title {
+            flex: 1;
+        }
+        
+        .reminder-title h3 {
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            font-size: 1.25rem;
+        }
+        
+        .reminder-dosage {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .reminder-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        
+        .icon-btn:hover {
+            background: var(--bg-light);
+        }
+        
+        .reminder-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .reminder-footer {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 24px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-actions {
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                flex: 1;
+            }
+            
+            .greeting h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reminder-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <div class="header-content">
+            <div class="greeting">
+                <h1 id="greetingText">Welcome!</h1>
+                <p id="currentDate"></p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="openAddModal()">+ Add Reminder</button>
+                <button class="btn btn-outline" style="color: white; border-color: white;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-main">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💊</div>
+                <div class="stat-info">
+                    <h3 id="totalReminders">0</h3>
+                    <p>Total Reminders</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-info">
+                    <h3 id="todayReminders">0</h3>
+                    <p>Due Today</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <h3 id="activeReminders">0</h3>
+                    <p>Active</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-header">
+            <h2>Your Medicine Reminders</h2>
+        </div>
+        
+        <div id="remindersContainer" class="reminders-grid">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Reminder Modal -->
+    <div id="reminderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Reminder</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reminderForm">
+                    <input type="hidden" id="reminderId">
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="medicineName">Medicine Name *</label>
+                        <input type="text" id="medicineName" class="form-control" placeholder="e.g., Aspirin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="dosage">Dosage *</label>
+                        <input type="text" id="dosage" class="form-control" placeholder="e.g., 1 tablet, 5 ml" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="frequency">Frequency *</label>
+                        <select id="frequency" class="form-control" required>
+                            <option value="">Select frequency</option>
+                            <option value="Once a day">Once a day</option>
+                            <option value="Twice a day">Twice a day</option>
+                            <option value="Three times a day">Three times a day</option>
+                            <option value="Every 4 hours">Every 4 hours</option>
+                            <option value="Every 6 hours">Every 6 hours</option>
+                            <option value="Every 8 hours">Every 8 hours</option>
+                            <option value="Every 12 hours">Every 12 hours</option>
+                            <option value="As needed">As needed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label class="form-label" for="startDate">Start Date *</label>
+                            <input type="date" id="startDate" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="endDate">End Date</label>
+                            <input type="date" id="endDate" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="timeOfDay">Time of Day *</label>
+                        <input type="time" id="timeOfDay" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="notes">Notes</label>
+                        <textarea id="notes" class="form-control" rows="3" placeholder="e.g., Take after food"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="submit" form="reminderForm" class="btn btn-primary" id="saveBtn">Save Reminder</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/reminder-notification.js"></script>
+</body>
+</html>
